@@ -847,4 +847,29 @@ th:nth-child(5), td:nth-child(5) { /* Actions */
   th:last-child, td:last-child {
     padding-right: 1rem;
   }
+}
+
+/* Header Actions Button Styles */
+.header-actions .btn-primary {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+  border: none;
+  transition: all 0.3s ease;
+  color: white !important;
+}
+
+.header-actions .btn-primary:hover {
+  background: linear-gradient(135deg, var(--primary-hover), var(--primary-color));
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+  color: white !important;
+}
+
+.header-actions .btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(99, 102, 241, 0.1);
+  color: white !important;
+}
+
+.header-actions .btn-primary .btn-icon {
+  color: white;
 } 

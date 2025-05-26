@@ -1,37 +1,65 @@
-<h1>New Todo</h1>
-
-<% if @todo.errors.any? %>
-  <div id="error_explanation" class="error-messages">
-    <h2><%= pluralize(@todo.errors.count, "error") %> prohibited this todo from being saved:</h2>
-    <ul>
-      <% @todo.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
+<div class="page-header">
+  <div class="header-content">
+    <h1>Create New Todo</h1>
   </div>
-<% end %>
+</div>
 
-<%= form_with model: @todo, data: { turbo: false } do |form| %>
-  <p>
-  <%= form.label :name %><br>
-  <%= form.text_field :name %>
-  </p>
+<div class="card todo-show-card">
+  <% if @todo.errors.any? %>
+    <div id="error_explanation" class="error-messages">
+      <h2><%= pluralize(@todo.errors.count, "error") %> prohibited this todo from being saved:</h2>
+      <ul>
+        <% @todo.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-  <p>
-  <%= form.label :description %><br>
-  <%= form.text_area :description %>
-  </p>
+  <%= form_with model: @todo, data: { turbo: false } do |form| %>
+    <div class="todo-details">
+      <div class="detail-section">
+        <div class="form-group">
+          <%= form.label :name, class: "form-label" %>
+          <%= form.text_field :name, class: "form-input", placeholder: "Enter todo name" %>
+        </div>
 
-  <p>
-  <%= form.label :state %><br>
-  <%= form.select :state, 
-    options_for_select([
-      ['Pending', 'pending'],
-      ['Doing', 'doing'],
-      ['Done', 'done']
-    ], @todo.state)
-  %>
-  </p>
+        <div class="form-group">
+          <%= form.label :description, class: "form-label" %>
+          <%= form.text_area :description, class: "form-input", rows: 4, placeholder: "Enter todo description" %>
+        </div>
+      </div>
 
-  <p><%= form.submit "Create Todo" %></p>
-<% end %>
+      <div class="state-section">
+        <label class="detail-label">Initial Status</label>
+        <div class="state-selector">
+          <%= form.select :state, 
+            options_for_select([
+              ['Pending', 'pending'],
+              ['Doing', 'doing'],
+              ['Done', 'done']
+            ], @todo.state),
+            {},
+            { class: "form-select" }
+          %>
+        </div>
+      </div>
+    </div>
+
+    <div class="todo-actions">
+      <%= form.submit class: "btn btn-primary" do %>
+        <svg xmlns="http://www.w3.org/2000/svg" class="btn-icon" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+        </svg>
+        Create Todo
+      <% end %>
+      
+      <%= link_to todos_path, class: "btn btn-secondary" do %>
+        <svg xmlns="http://www.w3.org/2000/svg" class="btn-icon" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+        </svg>
+        Cancel
+      <% end %>
+    </div>
+  <% end %>
+</div>
