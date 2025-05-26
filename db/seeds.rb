@@ -1,6 +1,3 @@
-#
-Todo.destroy_all
-
 # Sample todo names and descriptions
 todo_names = [
   "Complete Project Documentation",
