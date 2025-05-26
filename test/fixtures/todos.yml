@@ -1,0 +1,20 @@
+one:
+  name: "First Todo"
+  description: "This is the first todo item"
+  state: "pending"
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>
+
+two:
+  name: "Second Todo"
+  description: "This is the second todo item"
+  state: "doing"
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %>
+
+three:
+  name: "Third Todo"
+  description: "This is the third todo item"
+  state: "done"
+  created_at: <%= Time.current %>
+  updated_at: <%= Time.current %> 
