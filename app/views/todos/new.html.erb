@@ -1,0 +1,37 @@
+<h1>New Todo</h1>
+
+<% if @todo.errors.any? %>
+  <div id="error_explanation" class="error-messages">
+    <h2><%= pluralize(@todo.errors.count, "error") %> prohibited this todo from being saved:</h2>
+    <ul>
+      <% @todo.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with model: @todo, data: { turbo: false } do |form| %>
+  <p>
+  <%= form.label :name %><br>
+  <%= form.text_field :name %>
+  </p>
+
+  <p>
+  <%= form.label :description %><br>
+  <%= form.text_area :description %>
+  </p>
+
+  <p>
+  <%= form.label :state %><br>
+  <%= form.select :state, 
+    options_for_select([
+      ['Pending', 'pending'],
+      ['Doing', 'doing'],
+      ['Done', 'done']
+    ], @todo.state)
+  %>
+  </p>
+
+  <p><%= form.submit "Create Todo" %></p>
+<% end %>

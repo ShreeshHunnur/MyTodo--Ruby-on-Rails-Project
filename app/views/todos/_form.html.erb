@@ -1,0 +1,40 @@
+<% if todo.errors.any? %>
+  <div id="error_explanation" class="error-messages">
+    <h2><%= pluralize(todo.errors.count, "error") %> prohibited this todo from being saved:</h2>
+    <ul>
+      <% todo.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="form-container">
+  <div class="form-group">
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, class: "form-input" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :description, class: "form-label" %>
+    <%= form.text_area :description, class: "form-input", rows: 4 %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :state, class: "form-label" %>
+    <%= form.select :state, 
+      options_for_select([
+        ['Pending', 'pending'],
+        ['Doing', 'doing'],
+        ['Done', 'done']
+      ], todo.state),
+      {},
+      { class: "form-select" }
+    %>
+  </div>
+
+  <div class="form-actions">
+    <%= form.submit class: "btn btn-primary" %>
+    <%= link_to "Cancel", todos_path, class: "btn btn-secondary" %>
+  </div>
+</div> 

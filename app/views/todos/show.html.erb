@@ -1,0 +1,68 @@
+<div class="page-header">
+  <div class="header-content">
+    <h1><%= @todo.name %></h1>
+    <span class="state-badge state-<%= @todo.state %>">
+      <%= @todo.state.titleize %>
+    </span>
+  </div>
+</div>
+
+<div class="card todo-show-card">
+  <div class="todo-details">
+    <div class="detail-section">
+      <div class="detail-group">
+        <label class="detail-label">Description</label>
+        <div class="detail-value description-box">
+          <%= @todo.description %>
+        </div>
+      </div>
+
+      <div class="detail-group">
+        <label class="detail-label">Created</label>
+        <div class="detail-value">
+          <%= @todo.created_at.strftime("%B %d, %Y at %I:%M %p") %>
+        </div>
+      </div>
+
+      <div class="detail-group">
+        <label class="detail-label">Last Updated</label>
+        <div class="detail-value">
+          <%= @todo.updated_at.strftime("%B %d, %Y at %I:%M %p") %>
+        </div>
+      </div>
+    </div>
+
+    <div class="state-section">
+      <label class="detail-label">Update Status</label>
+      <div class="state-selector">
+        <%= form_with url: update_state_todo_path(@todo), method: :patch, data: { turbo: false } do |form| %>
+          <%= form.select :state, 
+            options_for_select([
+              ['Pending', 'pending'],
+              ['Doing', 'doing'],
+              ['Done', 'done']
+            ], @todo.state),
+            {},
+            { class: "form-select", onchange: 'this.form.submit()' }
+          %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="todo-actions">
+    <%= link_to edit_todo_path(@todo), class: "btn btn-primary" do %>
+      <svg xmlns="http://www.w3.org/2000/svg" class="btn-icon" viewBox="0 0 20 20" fill="currentColor">
+        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+      </svg>
+      Edit Todo
+    <% end %>
+    
+    <%= link_to todos_path, class: "btn btn-secondary" do %>
+      <svg xmlns="http://www.w3.org/2000/svg" class="btn-icon" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+      </svg>
+      Back to List
+    <% end %>
+  </div>
+</div>
